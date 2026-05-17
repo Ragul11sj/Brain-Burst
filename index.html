@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Brain Burst - Quiz Game</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="toast" class="feedback-toast"></div>
+
+<!-- HOME SCREEN -->
+<div id="homeScreen" class="screen active">
+  <div class="home-card">
+    <div class="logo-badge"><span>⚡</span> BRAIN BURST QUIZ</div>
+    <h1>Test Your <em>Knowledge.</em><br>Beat the Clock.</h1>
+    <p>10 questions. 15 seconds each. 3 lifelines. Can you hit a perfect score?</p>
+
+    <div class="section-label">PICK A CATEGORY</div>
+    <div class="category-grid" id="catGrid">
+      <button class="cat-btn selected" data-cat="mixed" onclick="selectCat(this)"><span class="cat-icon">🎯</span>Mixed</button>
+      <button class="cat-btn" data-cat="science" onclick="selectCat(this)"><span class="cat-icon">🔬</span>Science</button>
+      <button class="cat-btn" data-cat="history" onclick="selectCat(this)"><span class="cat-icon">📜</span>History</button>
+      <button class="cat-btn" data-cat="geography" onclick="selectCat(this)"><span class="cat-icon">🌍</span>Geography</button>
+      <button class="cat-btn" data-cat="tech" onclick="selectCat(this)"><span class="cat-icon">💻</span>Technology</button>
+      <button class="cat-btn" data-cat="math" onclick="selectCat(this)"><span class="cat-icon">🧮</span>Math</button>
+    </div>
+
+    <div class="section-label">DIFFICULTY</div>
+    <div class="diff-row">
+      <button class="diff-btn selected" data-diff="easy" onclick="selectDiff(this)">🟢 Easy</button>
+      <button class="diff-btn" data-diff="medium" onclick="selectDiff(this)">🟡 Medium</button>
+      <button class="diff-btn" data-diff="hard" onclick="selectDiff(this)">🔴 Hard</button>
+    </div>
+
+    <button class="start-btn" onclick="startQuiz()">Start Quiz ⚡</button>
+  </div>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="quizScreen" class="screen">
+  <div class="quiz-header">
+    <div class="q-meta">Question <strong id="qNum">1</strong> of <strong id="qTotal">10</strong></div>
+    <div class="score-pill">⭐ <span id="scoreLive">0</span> pts</div>
+  </div>
+  <div class="timer-bar-wrap"><div class="timer-bar" id="timerBar"></div></div>
+  <div class="timer-num" id="timerNum">15</div>
+
+  <div class="question-card">
+    <div class="q-category-tag" id="qCatTag">Science</div>
+    <div class="question-text" id="questionText">Loading...</div>
+  </div>
+
+  <div class="options-grid" id="optionsGrid"></div>
+
+  <div class="lifeline-row">
+    <span class="ll-label">LIFELINES:</span>
+    <button class="ll-btn" id="ll50" onclick="useFiftyFifty()"><span class="ll-icon">✂️</span> 50-50</button>
+    <button class="ll-btn" id="llSkip" onclick="useSkip()"><span class="ll-icon">⏭️</span> Skip</button>
+    <button class="ll-btn" id="llTime" onclick="useExtraTime()"><span class="ll-icon">⏳</span> +10s</button>
+  </div>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div id="resultScreen" class="screen">
+  <div class="result-card">
+    <span class="trophy" id="trophyEmoji">🏆</span>
+    <h2 id="resultTitle">Brilliant!</h2>
+    <p class="tagline" id="resultTagline">You scored 90 out of 100</p>
+
+    <div class="stats-row">
+      <div class="stat-box"><div class="sv" id="rScore">0</div><div class="sl">SCORE</div></div>
+      <div class="stat-box"><div class="sv" id="rCorrect">0</div><div class="sl">CORRECT</div></div>
+      <div class="stat-box"><div class="sv" id="rStreak">0</div><div class="sl">BEST STREAK</div></div>
+      <div class="stat-box"><div class="sv" id="rTime">0s</div><div class="sl">AVG TIME</div></div>
+    </div>
+
+    <div class="answers-list">
+      <h3>REVIEW</h3>
+      <div id="answersList"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="outline-btn" onclick="goHome()">← Home</button>
+      <button class="start-btn" onclick="restartQuiz()">Play Again ⚡</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
